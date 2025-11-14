@@ -1,0 +1,2436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pooja Rani – Fashion Designer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    :root {
+      --bg-main: #f8f4f1;
+      --text-main: #111111;
+      --text-muted: #555555;
+      --accent-rose: #d6a4a4;
+      --accent-mauve: #c3b4d7;
+      --accent-blush: #f1c6c2;
+      --accent-taupe: #c5b1a0;
+      --border-soft: rgba(0,0,0,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      cursor: none !important;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top left, rgba(214,164,164,0.18), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(195,180,215,0.22), transparent 55%),
+                  var(--bg-main);
+      color: var(--text-main);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* Custom cursor */
+    .cursor-dot, .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: transform 0.12s ease-out, width 0.18s ease, height 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+    }
+
+    .cursor-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--text-main);
+    }
+
+    .cursor-ring {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      mix-blend-mode: multiply;
+    }
+
+    .cursor-ring--hover {
+      width: 40px;
+      height: 40px;
+      border-color: var(--accent-rose);
+      background: rgba(241,198,194,0.12);
+    }
+
+    .cursor-hidden .cursor-dot,
+    .cursor-hidden .cursor-ring {
+      opacity: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9000;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(0px);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1.4rem 6vw;
+    }
+
+    .header-scrolled {
+      background: rgba(248,244,241,0.92);
+      box-shadow: 0 10px 25px rgba(15,12,10,0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .header-scrolled .header-inner {
+      padding-top: 0.7rem;
+      padding-bottom: 0.7rem;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 0.25em;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .logo-sub {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    .search-wrapper {
+      flex: 1;
+      max-width: 520px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.12);
+      padding: 0.7rem 2.8rem 0.7rem 1.1rem;
+      font-size: 0.85rem;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(12px);
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: #888;
+      letter-spacing: 0.04em;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9rem;
+      color: #777;
+      pointer-events: none;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .btn-meet {
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.16);
+      padding: 0.55rem 1.6rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: linear-gradient(120deg, rgba(214,164,164,0.22), rgba(248,244,241,0.9));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-meet::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0.0), rgba(241,198,194,0.5), rgba(255,255,255,0.0));
+      opacity: 0;
+      transform: translateX(-30%);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-meet:hover::after {
+      opacity: 1;
+      transform: translateX(30%);
+    }
+
+    .profile-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 500;
+      background: radial-gradient(circle at 20% 0%, rgba(214,164,164,0.37), transparent 60%), #fdf8f5;
+      position: relative;
+    }
+
+    .profile-tooltip {
+      position: absolute;
+      bottom: -1.9rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.65rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: #111;
+      color: #fdfdfd;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .profile-avatar:hover .profile-tooltip {
+      opacity: 1;
+      transform: translate(-50%, -2px);
+    }
+
+    .profile-dropdown {
+      position: absolute;
+      top: 120%;
+      right: 0;
+      background: #fff;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      box-shadow: 0 16px 40px rgba(15,12,10,0.18);
+      border: 1px solid rgba(0,0,0,0.06);
+      font-size: 0.75rem;
+      min-width: 190px;
+      display: none;
+      z-index: 9100;
+    }
+
+    .profile-dropdown.active {
+      display: block;
+      animation: fadeInUp 0.25s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge-location {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    /* Vertical Nav Dots */
+    .side-nav {
+      position: fixed;
+      left: 2.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      z-index: 8000;
+    }
+
+    .side-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.4);
+      background: transparent;
+      position: relative;
+      transition: all 0.18s ease;
+    }
+
+    .side-dot:hover {
+      transform: scale(1.2);
+      background: rgba(214,164,164,0.5);
+      border-color: rgba(17,17,17,0.9);
+    }
+
+    .side-dot.active {
+      background: #111;
+      border-color: #111;
+      transform: scale(1.25);
+    }
+
+    .side-dot-tooltip {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.9);
+      color: #fdfdfd;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .side-dot:hover .side-dot-tooltip {
+      opacity: 1;
+      transform: translate(0.15rem, -50%);
+    }
+
+    /* Back to top */
+    .back-to-top {
+      position: fixed;
+      right: 1.7rem;
+      bottom: 1.7rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.16);
+      background: rgba(248,244,241,0.86);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      box-shadow: 0 12px 28px rgba(15,12,10,0.12);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 7800;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .back-to-top span { transform: translateY(-1px); }
+
+    /* Main layout */
+    main {
+      padding-top: 90px;
+    }
+
+    section {
+      padding: 5.5rem 7vw;
+      position: relative;
+    }
+
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 2.5vw, 2.3rem);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+    }
+
+    .section-label-vertical {
+      position: absolute;
+      right: 4vw;
+      top: 3rem;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-size: 0.65rem;
+      color: rgba(0,0,0,0.45);
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hero */
+    #home {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      align-items: center;
+      column-gap: 5vw;
+    }
+
+    .hero-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      color: var(--text-muted);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 3.5vw, 3.1rem);
+      line-height: 1.12;
+      text-transform: uppercase;
+    }
+
+    .hero-title span:nth-child(1) { font-size: 1.2rem; letter-spacing: 0.25em; display:block; margin-bottom:0.6rem; }
+    .hero-title span:nth-child(2) { letter-spacing: 0.08em; }
+    .hero-title span:nth-child(3) { letter-spacing: 0.18em; font-weight: 500; display:block; margin-top:0.35rem; }
+
+    .hero-tagline {
+      margin-top: 1.1rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 460px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1.6rem;
+    }
+
+    .hero-badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.18);
+      background: rgba(255,255,255,0.75);
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 2rem;
+      align-items: center;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      border-radius: 999px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 0.7rem 1.6rem;
+      border: 1px solid rgba(0,0,0,0.16);
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: #111;
+      color: #fdfdfd;
+      border-color: #111;
+    }
+
+    .btn-primary::after,
+    .btn-secondary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(120deg, rgba(255,255,255,0.0), rgba(241,198,194,0.6), rgba(255,255,255,0.0));
+      opacity: 0;
+      transform: translateX(-40%);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .btn-primary:hover::after,
+    .btn-secondary:hover::after {
+      opacity: 1;
+      transform: translateX(40%);
+    }
+
+    .btn-secondary {
+      background: rgba(248,244,241,0.8);
+    }
+
+    .hero-meta {
+      margin-top: 1.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .hero-meta span { display: inline-flex; align-items:center; gap:0.45rem; }
+
+    .hero-vertical-label {
+      position: absolute;
+      left: 0.3rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      letter-spacing: 0.25em;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.5);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      left: 50%;
+      bottom: 1.5rem;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .scroll-line {
+      width: 40px;
+      height: 1px;
+      background: rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      left: -20px;
+      top: 0;
+      width: 20px;
+      height: 100%;
+      background: #111;
+      animation: scrollPulse 1.4s infinite;
+    }
+
+    @keyframes scrollPulse {
+      0% { transform: translateX(0); opacity: 1; }
+      100% { transform: translateX(40px); opacity: 0; }
+    }
+
+    .hero-right {
+      position: relative;
+      padding: 1.8rem;
+    }
+
+    .hero-artboard {
+      border-radius: 26px;
+      background: radial-gradient(circle at top left, rgba(214,164,164,0.35), rgba(241,198,194,0.1) 40%, transparent 70%),
+                  linear-gradient(140deg, rgba(255,255,255,0.95), rgba(255,255,255,0.7));
+      padding: 1.8rem;
+      position: relative;
+      min-height: 320px;
+      overflow: hidden;
+      box-shadow: 0 22px 45px rgba(15,12,10,0.22);
+    }
+
+    .hero-main-image {
+      position: absolute;
+      right: 8%;
+      bottom: 7%;
+      width: 55%;
+      height: 70%;
+      border-radius: 18px;
+      background-image: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(0,0,0,0.6)),
+                        url('https://images.pexels.com/photos/7105601/pexels-photo-7105601.jpeg?auto=compress&cs=tinysrgb&w=1200');
+      background-size: cover;
+      background-position: center;
+      filter: saturate(0.9);
+    }
+
+    .hero-overlay-card {
+      position: absolute;
+      left: 10%;
+      bottom: 10%;
+      background: rgba(255,255,255,0.92);
+      border-radius: 16px;
+      padding: 0.9rem 1.1rem;
+      max-width: 230px;
+      box-shadow: 0 16px 30px rgba(15,12,10,0.18);
+      font-size: 0.78rem;
+    }
+
+    .hero-overlay-card span {
+      display: block;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-shapes {
+      position: absolute;
+      inset: 6%;
+      border-radius: 22px;
+      border: 1px dashed rgba(0,0,0,0.12);
+      pointer-events: none;
+    }
+
+    .hero-shapes::before,
+    .hero-shapes::after {
+      content: '';
+      position: absolute;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.12);
+    }
+
+    .hero-shapes::before {
+      width: 70px;
+      height: 70px;
+      top: 12%;
+      left: 12%;
+    }
+
+    .hero-shapes::after {
+      width: 130px;
+      height: 130px;
+      right: 8%;
+      top: 10%;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 3.5rem;
+      align-items: flex-start;
+    }
+
+    .about-intro {
+      max-width: 620px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-narrative p {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .profile-card {
+      border-radius: 22px;
+      padding: 1.6rem 1.7rem;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 14px 36px rgba(15,12,10,0.16);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(135deg, rgba(214,164,164,0.18), transparent 40%),
+                        linear-gradient(-135deg, rgba(195,180,215,0.18), transparent 40%);
+      opacity: 0.45;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    .profile-card-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .profile-card h3 {
+      font-family: 'Playfair Display', serif;
+      margin: 0 0 0.3rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+
+    .profile-role {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1.1rem;
+    }
+
+    .profile-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.5rem 1.5rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      font-size: 0.82rem;
+    }
+
+    .profile-list li span {
+      display: block;
+    }
+
+    .profile-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 0.1rem;
+    }
+
+    .about-doodles::before,
+    .about-doodles::after {
+      content: '';
+      position: absolute;
+      border-radius: 999px;
+      border: 1px dashed rgba(0,0,0,0.18);
+    }
+
+    .about-doodles::before {
+      width: 120px;
+      height: 120px;
+      top: 8%;
+      right: 12%;
+    }
+
+    .about-doodles::after {
+      width: 70px;
+      height: 70px;
+      bottom: 10%;
+      left: 8%;
+    }
+
+    /* What I Do */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.8rem;
+    }
+
+    .service-card {
+      border-radius: 18px;
+      padding: 1.4rem 1.5rem 1.6rem;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 10px 28px rgba(15,12,10,0.08);
+      position: relative;
+      overflow: hidden;
+      transform-origin: center;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(15,12,10,0.18);
+      border-color: rgba(214,164,164,0.65);
+    }
+
+    .service-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .service-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .service-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Lookbook */
+    .lookbook-grid {
+      column-count: 3;
+      column-gap: 1.6rem;
+    }
+
+    .lookbook-card {
+      break-inside: avoid;
+      margin-bottom: 1.6rem;
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #111;
+      cursor: pointer;
+    }
+
+    .lookbook-image {
+      width: 100%;
+      display: block;
+      height: auto;
+      transition: transform 0.4s ease;
+    }
+
+    .lookbook-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10,8,6,0.1), rgba(10,8,6,0.75));
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.2rem 1.3rem;
+      color: #fdfdfd;
+      transition: background 0.35s ease;
+    }
+
+    .lookbook-card:hover .lookbook-image {
+      transform: scale(1.06);
+    }
+
+    .lookbook-card:hover .lookbook-overlay {
+      background: linear-gradient(180deg, rgba(10,8,6,0.0), rgba(10,8,6,0.9));
+    }
+
+    .lookbook-title {
+      font-size: 0.98rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .lookbook-desc {
+      font-size: 0.8rem;
+      opacity: 0.9;
+      margin-bottom: 0.4rem;
+    }
+
+    .lookbook-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      font-size: 0.7rem;
+    }
+
+    .lookbook-tag {
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(9,6,4,0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9500;
+      padding: 1.5rem;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+      animation: modalFadeIn 0.25s ease forwards;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal {
+      max-width: 880px;
+      width: 100%;
+      border-radius: 22px;
+      background: #fdfbf9;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      overflow: hidden;
+      box-shadow: 0 24px 55px rgba(0,0,0,0.4);
+      transform: scale(0.93);
+      animation: modalScaleIn 0.26s ease forwards;
+    }
+
+    @keyframes modalScaleIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-image {
+      background-size: cover;
+      background-position: center;
+      min-height: 260px;
+    }
+
+    .modal-content {
+      padding: 1.8rem 2rem;
+      position: relative;
+      max-height: 75vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      background: rgba(255,255,255,0.9);
+    }
+
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .modal-sub {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .modal-body {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .modal-list-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 0.4rem;
+    }
+
+    .modal-list {
+      padding-left: 1.1rem;
+      margin: 0;
+      font-size: 0.82rem;
+      color: #444;
+    }
+
+    /* Skills */
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .skill-tag {
+      position: relative;
+      padding: 0.85rem 1.3rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.95);
+      border: 1px dashed rgba(0,0,0,0.28);
+      font-size: 0.8rem;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+      box-shadow: 0 12px 26px rgba(15,12,10,0.09);
+    }
+
+    .skill-tag::before {
+      content: '';
+      position: absolute;
+      left: 0.65rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.4);
+      background: rgba(214,164,164,0.9);
+    }
+
+    .skill-tag-inner {
+      padding-left: 0.9rem;
+    }
+
+    .skill-rating {
+      display: flex;
+      gap: 3px;
+      margin-top: 0.1rem;
+    }
+
+    .skill-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(214,164,164,0.9);
+      opacity: 0.6;
+    }
+
+    .skill-tag:hover {
+      transform: translateY(-4px) rotate(-1deg);
+      background: rgba(248,244,241,0.98);
+      box-shadow: 0 18px 36px rgba(15,12,10,0.16);
+    }
+
+    /* Experience */
+    .timeline {
+      position: relative;
+      padding-left: 1.8rem;
+      border-left: 1px solid rgba(0,0,0,0.2);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2.4rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -0.55rem;
+      top: 0.2rem;
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      background: #111;
+      border: 2px solid var(--bg-main);
+      box-shadow: 0 0 0 4px rgba(214,164,164,0.4);
+    }
+
+    .timeline-card {
+      border-radius: 18px;
+      padding: 1.3rem 1.5rem;
+      background: rgba(255,255,255,0.95);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 12px 30px rgba(15,12,10,0.12);
+    }
+
+    .timeline-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-company {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+    }
+
+    .timeline-role {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .timeline-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .timeline-list {
+      padding-left: 1.1rem;
+      margin: 0;
+      font-size: 0.86rem;
+      color: #333;
+    }
+
+    /* Education */
+    .education-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .edu-card {
+      border-radius: 18px;
+      padding: 1.3rem 1.4rem;
+      background: rgba(255,255,255,0.97);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 10px 26px rgba(15,12,10,0.1);
+    }
+
+    .edu-title {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-year {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    /* Process */
+    .process-steps {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+      gap: 1.4rem;
+      overflow-x: auto;
+      padding-bottom: 0.4rem;
+    }
+
+    .process-step {
+      border-radius: 18px;
+      padding: 1.3rem 1.3rem 1.4rem;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(0,0,0,0.06);
+      min-width: 180px;
+      box-shadow: 0 12px 25px rgba(15,12,10,0.12);
+      position: relative;
+    }
+
+    .process-badge {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 0.4rem;
+      color: var(--text-muted);
+    }
+
+    .process-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .process-title {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 0.35rem;
+    }
+
+    .process-text {
+      font-size: 0.84rem;
+      color: #444;
+    }
+
+    /* Hobbies */
+    .hobbies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.6rem;
+    }
+
+    .hobby-card {
+      position: relative;
+      border-radius: 16px;
+      padding: 1.1rem 1.2rem 1.3rem;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(0,0,0,0.11);
+      box-shadow: 0 12px 24px rgba(15,12,10,0.12);
+      transform-origin: center;
+      transform: rotate(-1.5deg);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .hobby-card:nth-child(2) {
+      transform: rotate(1.5deg) translateY(6px);
+    }
+
+    .hobby-card:nth-child(3) {
+      transform: rotate(-0.5deg) translateY(4px);
+    }
+
+    .hobby-card::before {
+      content: '';
+      position: absolute;
+      top: 0.6rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38px;
+      height: 14px;
+      background: #f1e0d6;
+      border-radius: 6px;
+      box-shadow: 0 4px 9px rgba(15,12,10,0.18);
+    }
+
+    .hobby-card:hover {
+      transform: rotate(0deg) translateY(-4px);
+      box-shadow: 0 18px 35px rgba(15,12,10,0.2);
+    }
+
+    .hobby-icon {
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .hobby-title {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 0.3rem;
+    }
+
+    .hobby-text {
+      font-size: 0.85rem;
+      color: #444;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+      gap: 2.8rem;
+      align-items: flex-start;
+    }
+
+    .contact-info-card {
+      border-radius: 20px;
+      padding: 1.7rem 1.8rem;
+      background: rgba(255,255,255,0.97);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 14px 30px rgba(15,12,10,0.14);
+    }
+
+    .contact-info-row {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.86rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    .contact-status {
+      margin-top: 1.1rem;
+      font-size: 0.86rem;
+      color: #333;
+    }
+
+    .contact-form-card {
+      border-radius: 20px;
+      padding: 1.7rem 1.9rem;
+      background: rgba(255,255,255,0.98);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 14px 32px rgba(15,12,10,0.16);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem 1.4rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      font-size: 0.8rem;
+    }
+
+    .form-group label {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .form-input,
+    .form-textarea {
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.14);
+      padding: 0.7rem 1rem;
+      font-size: 0.86rem;
+      outline: none;
+      background: rgba(249,246,242,0.85);
+    }
+
+    .form-textarea {
+      border-radius: 18px;
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: rgba(214,164,164,0.8);
+      box-shadow: 0 0 0 1px rgba(214,164,164,0.5);
+      background: #fff;
+    }
+
+    .form-error {
+      font-size: 0.7rem;
+      color: #b3261e;
+      min-height: 0.8rem;
+    }
+
+    .form-status {
+      margin-top: 0.9rem;
+      font-size: 0.8rem;
+      min-height: 1rem;
+    }
+
+    .btn-submit {
+      border-radius: 999px;
+      border: 1px solid #111;
+      background: #111;
+      color: #fdfdfd;
+      padding: 0.7rem 1.7rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-top: 0.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-submit::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(255,255,255,0.0), rgba(241,198,194,0.6), rgba(255,255,255,0.0));
+      opacity: 0;
+      transform: translateX(-40%);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .btn-submit:hover::after {
+      opacity: 1;
+      transform: translateX(40%);
+    }
+
+    /* Declaration */
+    .declaration-box {
+      border-radius: 18px;
+      padding: 1.6rem 1.7rem;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 12px 28px rgba(15,12,10,0.12);
+    }
+
+    .declaration-text {
+      font-size: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .declaration-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      font-size: 0.83rem;
+    }
+
+    .declaration-meta span {
+      display: inline-flex;
+      gap: 0.3rem;
+    }
+
+    .signature {
+      margin-top: 1.2rem;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.8rem;
+    }
+
+    /* Footer tag */
+    footer {
+      padding: 3.5rem 7vw 2.2rem;
+      position: relative;
+    }
+
+    .footer-tag {
+      max-width: 420px;
+      margin: 0 auto 1.5rem;
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.25);
+      background: rgba(255,255,255,0.96);
+      box-shadow: 0 16px 40px rgba(15,12,10,0.22);
+      padding: 1.6rem 1.7rem 1.5rem;
+      position: relative;
+      text-align: center;
+    }
+
+    .footer-tag::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.4);
+      background: radial-gradient(circle at 30% 30%, #f5e3d8, #d3b5a3);
+      box-shadow: 0 6px 12px rgba(15,12,10,0.35);
+    }
+
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .footer-role {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-quote {
+      font-size: 0.83rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.1rem;
+      font-size: 0.78rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a { text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.7rem; }
+
+    .footer-icons {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.34);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    .footer-care {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .footer-meta {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .side-nav { display: none; }
+      header .header-inner { padding-inline: 4vw; }
+      #home {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      }
+      .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .lookbook-grid { column-count: 2; }
+      .contact-grid { grid-template-columns: minmax(0, 1fr); }
+      .about-grid { grid-template-columns: minmax(0, 1fr); }
+      .education-grid { grid-template-columns: minmax(0, 1fr); }
+      .hobbies-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 768px) {
+      main { padding-top: 80px; }
+      header .header-inner {
+        padding-inline: 4vw;
+        gap: 0.75rem;
+      }
+      .search-wrapper { display: none; }
+      #home {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 2rem;
+      }
+      .hero-right { order: -1; }
+      section {
+        padding-inline: 6vw;
+      }
+      .lookbook-grid { column-count: 1; }
+      .services-grid { grid-template-columns: minmax(0, 1fr); }
+      .hobbies-grid { grid-template-columns: minmax(0, 1fr); }
+      .hero-vertical-label { display: none; }
+      .section-label-vertical { display: none; }
+      .form-grid { grid-template-columns: minmax(0, 1fr); }
+      .modal {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .modal-image { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      section {
+        padding-inline: 5vw;
+      }
+      .hero-ctas {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .back-to-top { right: 1.1rem; bottom: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- Header -->
+  <header id="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        POOJA RANI
+        <span class="logo-sub">Fashion Designer</span>
+      </div>
+      <div class="search-wrapper">
+        <input id="search-input" class="search-input" type="text" placeholder="Search looks, skills, stories…" />
+        <span class="search-icon">🔍</span>
+      </div>
+      <div class="header-actions">
+        <button class="btn-meet hover-target" data-scroll="about">Meet</button>
+        <div class="profile-avatar hover-target" id="profile-avatar">
+          <span>PR</span>
+          <div class="profile-tooltip">View Profile</div>
+          <div class="profile-dropdown" id="profile-dropdown">
+            <div style="font-weight:600; margin-bottom:0.2rem;">Pooja Rani</div>
+            <div style="font-size:0.78rem; margin-bottom:0.4rem;">Fashion Designer · Punjab, India</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">Focused on garment construction, pattern making and editorial-ready looks.</div>
+            <button style="margin-top:0.7rem; font-size:0.72rem; border-radius:999px; border:1px solid rgba(0,0,0,0.2); padding:0.3rem 0.9rem; text-transform:uppercase; letter-spacing:0.14em; background:rgba(248,244,241,0.9);" data-scroll="about" class="hover-target">Meet Pooja</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Side Navigation Dots -->
+  <nav class="side-nav">
+    <button class="side-dot hover-target" data-scroll="home"><span class="side-dot-tooltip">Home</span></button>
+    <button class="side-dot hover-target" data-scroll="about"><span class="side-dot-tooltip">About</span></button>
+    <button class="side-dot hover-target" data-scroll="what-i-do"><span class="side-dot-tooltip">What I Do</span></button>
+    <button class="side-dot hover-target" data-scroll="lookbook"><span class="side-dot-tooltip">Lookbook</span></button>
+    <button class="side-dot hover-target" data-scroll="skills"><span class="side-dot-tooltip">Skills</span></button>
+    <button class="side-dot hover-target" data-scroll="experience"><span class="side-dot-tooltip">Experience</span></button>
+    <button class="side-dot hover-target" data-scroll="education"><span class="side-dot-tooltip">Education</span></button>
+    <button class="side-dot hover-target" data-scroll="process"><span class="side-dot-tooltip">Process</span></button>
+    <button class="side-dot hover-target" data-scroll="hobbies"><span class="side-dot-tooltip">Hobbies</span></button>
+    <button class="side-dot hover-target" data-scroll="contact"><span class="side-dot-tooltip">Contact</span></button>
+    <button class="side-dot hover-target" data-scroll="declaration"><span class="side-dot-tooltip">Declaration</span></button>
+  </nav>
+
+  <!-- Back to top -->
+  <button class="back-to-top hover-target" id="back-to-top" data-scroll="home" aria-label="Back to top"><span>↑</span></button>
+
+  <main>
+    <!-- Hero -->
+    <section id="home">
+      <div class="hero-vertical-label">Fashion Designer</div>
+      <div class="reveal">
+        <div class="hero-label">Fashion Portfolio</div>
+        <h1 class="hero-title">
+          <span>I am</span>
+          <span>Pooja Rani</span>
+          <span>Fashion Designer</span>
+        </h1>
+        <p class="hero-tagline">
+          I am a creative, highly motivated fashion designer transforming ideas into wearable stories. I love shaping fresh silhouettes, refining every stitch, and growing alongside collaborative studios and runway-ready teams.
+        </p>
+        <div class="hero-badges">
+          <span class="hero-badge">Garment Construction</span>
+          <span class="hero-badge">Pattern Making</span>
+          <span class="hero-badge">Runway Support</span>
+        </div>
+        <div class="hero-ctas">
+          <button class="btn-primary hover-target" data-scroll="lookbook">View Lookbook</button>
+          <button class="btn-secondary hover-target" data-scroll="about">My Story</button>
+        </div>
+        <div class="hero-meta">
+          <span><strong>Location</strong> · Punjab, India</span>
+          <span><strong>Languages</strong> · Hindi · Punjabi · English</span>
+          <span><strong>Experience</strong> · 2+ Years</span>
+        </div>
+      </div>
+      <div class="hero-right reveal">
+        <div class="hero-artboard" data-parallax>
+          <div class="hero-shapes"></div>
+          <div class="hero-main-image"></div>
+          <div class="hero-overlay-card">
+            <span>New Capsule</span>
+            Resort Bloom – a light, fluid edit inspired by coastal light, layered chiffons and sun-soft pastels.
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll to explore</span>
+        <span class="scroll-line"></span>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <div class="section-label-vertical">Profile</div>
+      <div class="reveal">
+        <h2 class="section-heading">About Me</h2>
+        <p class="section-subtitle">The designer behind the seams.</p>
+      </div>
+      <div class="about-grid about-doodles reveal">
+        <div>
+          <p class="about-intro">
+            I am Pooja Rani, a fashion designer from Punjab, India, shaped by the rhythm of Indian textiles and the precision of European silhouettes. I design garments that balance comfort, culture and a quiet sense of drama.
+          </p>
+          <div class="about-narrative">
+            <p>
+              My journey into fashion began with a fascination for how fabric moves around the body. From early sketches in school notebooks to structured design training, I have always treated garments as moving sculptures that tell stories for the wearer.
+            </p>
+            <p>
+              Working with Punjab Fashion House refined my understanding of garment construction, client fittings and the discipline behind every seam. At Pol Green in Croatia, I experienced European design sensibilities and sustainable material choices, blending these influences with my Indian roots to create a personal, cross-cultural design language.
+            </p>
+            <p>
+              Today, I am focused on silhouettes that feel considered from every angle, patterns that honour the body’s movement, and finishes that give each piece a couture-like attention to detail. Whether it is backstage at a show or inside a quiet studio, I stay committed to listening, learning and designing garments that truly serve the people who wear them.
+            </p>
+          </div>
+        </div>
+        <aside class="profile-card">
+          <div class="profile-card-inner">
+            <h3>Pooja Rani</h3>
+            <div class="profile-role">Fashion Designer</div>
+            <ul class="profile-list">
+              <li>
+                <span class="profile-label">Date of Birth</span>
+                <span>03 Aug 2004</span>
+              </li>
+              <li>
+                <span class="profile-label">Nationality</span>
+                <span>Indian</span>
+              </li>
+              <li>
+                <span class="profile-label">Religion</span>
+                <span>Sikh</span>
+              </li>
+              <li>
+                <span class="profile-label">Gender</span>
+                <span>Female</span>
+              </li>
+              <li>
+                <span class="profile-label">Base</span>
+                <span>Bhagian Village, P.O. Hussainpur, Lalowal, Punjab, India (144210)</span>
+              </li>
+              <li>
+                <span class="profile-label">Languages</span>
+                <span>Hindi, Punjabi, English</span>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- What I Do -->
+    <section id="what-i-do">
+      <div class="section-label-vertical">Services</div>
+      <div class="reveal">
+        <h2 class="section-heading">What I Do</h2>
+        <p class="section-subtitle">Design services &amp; creative strengths.</p>
+      </div>
+      <div class="services-grid reveal">
+        <article class="service-card hover-target" data-searchable="Garment Design Silhouette Exploration concept sketching structure proportions flow garments">
+          <div class="service-icon">👗</div>
+          <h3 class="service-title">Garment Design &amp; Silhouette Exploration</h3>
+          <p class="service-desc">From mood-led sketching to mapping structure, proportion and movement, I design silhouettes that frame the body with intention.</p>
+        </article>
+        <article class="service-card hover-target" data-searchable="Pattern Making Tailoring advanced stitching fit">
+          <div class="service-icon">✂️</div>
+          <h3 class="service-title">Pattern Making &amp; Tailoring</h3>
+          <p class="service-desc">Drafting precise patterns, refining fit on the stand and delivering sharp, carefully finished tailoring for everyday and occasion wear.</p>
+        </article>
+        <article class="service-card hover-target" data-searchable="Textile Fabric Curation textures trims comfort">
+          <div class="service-icon">🧵</div>
+          <h3 class="service-title">Textile &amp; Fabric Curation</h3>
+          <p class="service-desc">Curating fabrics, textures and trims that support the silhouette, comfort and story of every collection.</p>
+        </article>
+        <article class="service-card hover-target" data-searchable="Trend Research Moodboards global local direction">
+          <div class="service-icon">🗂️</div>
+          <h3 class="service-title">Trend Research &amp; Moodboards</h3>
+          <p class="service-desc">Studying global and local fashion movements, building moodboards that define the visual direction of each project.</p>
+        </article>
+        <article class="service-card hover-target" data-searchable="Custom Fittings Style Refinement adjustments details">
+          <div class="service-icon">👠</div>
+          <h3 class="service-title">Custom Fittings &amp; Style Refinement</h3>
+          <p class="service-desc">Conducting fittings, reading how garments move on real bodies and making nuanced adjustments to elevate comfort and style.</p>
+        </article>
+        <article class="service-card hover-target" data-searchable="Runway Editorial Support backstage shows styling">
+          <div class="service-icon">🧥</div>
+          <h3 class="service-title">Runway &amp; Editorial Support</h3>
+          <p class="service-desc">Supporting fashion shows and editorials through garment prep, steaming, styling and last-minute on-body problem solving.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Lookbook -->
+    <section id="lookbook">
+      <div class="section-label-vertical">Lookbook</div>
+      <div class="reveal">
+        <h2 class="section-heading">Lookbook</h2>
+        <p class="section-subtitle">Collections, concepts &amp; selected work.</p>
+      </div>
+      <div class="lookbook-grid reveal" id="lookbook-grid">
+        <article class="lookbook-card hover-target" data-project="evening-elegance" data-searchable="Evening Elegance Gown Capsule eveningwear gowns drape">
+          <img class="lookbook-image" src="https://images.pexels.com/photos/6311655/pexels-photo-6311655.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Evening gown" />
+          <div class="lookbook-overlay">
+            <div class="lookbook-title">Evening Elegance – Gown Capsule</div>
+            <div class="lookbook-desc">A study in liquid drape and precise corsetry for twilight events.</div>
+            <div class="lookbook-tags">
+              <span class="lookbook-tag">Eveningwear</span>
+              <span class="lookbook-tag">Draping</span>
+            </div>
+          </div>
+        </article>
+        <article class="lookbook-card hover-target" data-project="heritage-threads" data-searchable="Heritage Threads Punjabi Fusion Series cultural fusion embroidery">
+          <img class="lookbook-image" src="https://images.pexels.com/photos/3760853/pexels-photo-3760853.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Heritage fusion" />
+          <div class="lookbook-overlay">
+            <div class="lookbook-title">Heritage Threads – Punjabi Fusion Series</div>
+            <div class="lookbook-desc">Traditional motifs, contemporary cuts and soft, fluid layering.</div>
+            <div class="lookbook-tags">
+              <span class="lookbook-tag">Fusion</span>
+              <span class="lookbook-tag">Cultural</span>
+            </div>
+          </div>
+        </article>
+        <article class="lookbook-card hover-target" data-project="minimal-street" data-searchable="Minimal Street European Edit streetwear minimal silhouettes">
+          <img class="lookbook-image" src="https://images.pexels.com/photos/6311579/pexels-photo-6311579.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Minimal street" />
+          <div class="lookbook-overlay">
+            <div class="lookbook-title">Minimal Street – European Edit</div>
+            <div class="lookbook-desc">Clean tailoring with Croatian-inspired colour blocking and texture.</div>
+            <div class="lookbook-tags">
+              <span class="lookbook-tag">Street</span>
+              <span class="lookbook-tag">Minimal</span>
+            </div>
+          </div>
+        </article>
+        <article class="lookbook-card hover-target" data-project="soft-whites" data-searchable="Soft Whites Bridal Concept Line bridal whites tulle">
+          <img class="lookbook-image" src="https://images.pexels.com/photos/3738085/pexels-photo-3738085.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Bridal" />
+          <div class="lookbook-overlay">
+            <div class="lookbook-title">Soft Whites – Bridal Concept Line</div>
+            <div class="lookbook-desc">Feather-light layers, translucent tulles and subtle pearl detailing.</div>
+            <div class="lookbook-tags">
+              <span class="lookbook-tag">Bridal</span>
+              <span class="lookbook-tag">Couture</span>
+            </div>
+          </div>
+        </article>
+        <article class="lookbook-card hover-target" data-project="eco-layers" data-searchable="Eco Layers Sustainable Capsule sustainable natural fabrics">
+          <img class="lookbook-image" src="https://images.pexels.com/photos/6311645/pexels-photo-6311645.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Eco layers" />
+          <div class="lookbook-overlay">
+            <div class="lookbook-title">Eco Layers – Sustainable Capsule</div>
+            <div class="lookbook-desc">Soft tailoring in organic cottons, linens and repurposed textiles.</div>
+            <div class="lookbook-tags">
+              <span class="lookbook-tag">Sustainable</span>
+              <span class="lookbook-tag">Daywear</span>
+            </div>
+          </div>
+        </article>
+        <article class="lookbook-card hover-target" data-project="resort-bloom" data-searchable="Resort Bloom Summer Story resortwear colour travel">
+          <img class="lookbook-image" src="https://images.pexels.com/photos/6311587/pexels-photo-6311587.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Resort" />
+          <div class="lookbook-overlay">
+            <div class="lookbook-title">Resort Bloom – Summer Story</div>
+            <div class="lookbook-desc">Sun-washed prints, airy volumes and relaxed yet polished lines.</div>
+            <div class="lookbook-tags">
+              <span class="lookbook-tag">Resort</span>
+              <span class="lookbook-tag">Print</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="section-label-vertical">Skills</div>
+      <div class="reveal">
+        <h2 class="section-heading">Skills</h2>
+        <p class="section-subtitle">Craft, technique &amp; collaboration.</p>
+      </div>
+      <div class="skills-tags reveal">
+        <div class="skill-tag hover-target" data-searchable="Garment construction pattern making">
+          <div class="skill-tag-inner">
+            <div>Garment construction &amp; pattern making</div>
+            <div class="skill-rating">
+              <span class="skill-dot"></span><span class="skill-dot"></span><span class="skill-dot"></span><span class="skill-dot"></span>
+            </div>
+          </div>
+        </div>
+        <div class="skill-tag hover-target" data-searchable="Tailoring advanced stitching techniques">
+          <div class="skill-tag-inner">
+            <div>Tailoring and advanced stitching techniques</div>
+            <div class="skill-rating">
+              <span class="skill-dot"></span><span class="skill-dot"></span><span class="skill-dot"></span><span class="skill-dot"></span>
+            </div>
+          </div>
+        </div>
+        <div class="skill-tag hover-target" data-searchable="Textile fabric knowledge">
+          <div class="skill-tag-inner">
+            <div>Textile and fabric knowledge</div>
+            <div class="skill-rating">
+              <span class="skill-dot"></span><span class="skill-dot"></span><span class="skill-dot"></span>
+            </div>
+          </div>
+        </div>
+        <div class="skill-tag hover-target" data-searchable="Trend research mood board creation">
+          <div class="skill-tag-inner">
+            <div>Trend research and mood board creation</div>
+            <div class="skill-rating">
+              <span class="skill-dot"></span><span class="skill-dot"></span><span class="skill-dot"></span>
+            </div>
+          </div>
+        </div>
+        <div class="skill-tag hover-target" data-searchable="Attention to detail quality control">
+          <div class="skill-tag-inner">
+            <div>Attention to detail &amp; quality control</div>
+            <div class="skill-rating">
+              <span class="skill-dot"></span><span class="skill-dot"></span><span class="skill-dot"></span><span class="skill-dot"></span>
+            </div>
+          </div>
+        </div>
+        <div class="skill-tag hover-target" data-searchable="Teamwork collaboration">
+          <div class="skill-tag-inner">
+            <div>Teamwork and collaboration</div>
+            <div class="skill-rating">
+              <span class="skill-dot"></span><span class="skill-dot"></span><span class="skill-dot"></span>
+            </div>
+          </div>
+        </div>
+        <div class="skill-tag hover-target" data-searchable="Time management meeting deadlines">
+          <div class="skill-tag-inner">
+            <div>Time management &amp; meeting deadlines</div>
+            <div class="skill-rating">
+              <span class="skill-dot"></span><span class="skill-dot"></span><span class="skill-dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <div class="section-label-vertical">Experience</div>
+      <div class="reveal">
+        <h2 class="section-heading">Experience</h2>
+        <p class="section-subtitle">Studios, ateliers &amp; cross-cultural projects.</p>
+      </div>
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card" data-searchable="Punjab Fashion House Assistant Junior Fashion Designer">
+            <div class="timeline-card-header">
+              <div>
+                <div class="timeline-company">Punjab Fashion House</div>
+                <div class="timeline-role">Assistant / Junior Fashion Designer</div>
+              </div>
+              <div class="timeline-meta">Punjab, India · 2021 – 2023 (Two Years)</div>
+            </div>
+            <ul class="timeline-list">
+              <li>Assisted senior designers through trend research, sketching, fabric and trim selection.</li>
+              <li>Practised advanced stitching and tailoring for custom and special-event garments.</li>
+              <li>Collaborated with pattern makers to translate sketches into accurate, well-fitting patterns.</li>
+              <li>Helped prepare seasonal showcases and supported backstage garment preparation.</li>
+              <li>Worked with clients during fittings, adjusting designs based on real-time feedback.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card" data-searchable="Pol Green Croatia Fashion Design Assistant Support">
+            <div class="timeline-card-header">
+              <div>
+                <div class="timeline-company">Pol Green</div>
+                <div class="timeline-role">Fashion Design Assistant / Support</div>
+              </div>
+              <div class="timeline-meta">Croatia · Six Months</div>
+            </div>
+            <ul class="timeline-list">
+              <li>Supported the creative team in fabric selection and cutting for international collections.</li>
+              <li>Observed European design workflows, with emphasis on sustainable materials and market preferences.</li>
+              <li>Contributed to moodboards and assisted in preparing samples for buyers and presentations.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <div class="section-label-vertical">Education</div>
+      <div class="reveal">
+        <h2 class="section-heading">Education</h2>
+        <p class="section-subtitle">Building the foundation.</p>
+      </div>
+      <div class="education-grid reveal">
+        <article class="edu-card" data-searchable="Higher Secondary 2021 +2 Pass">
+          <div class="edu-title">Higher Secondary (+2 Pass)</div>
+          <div class="edu-year">2021</div>
+        </article>
+        <article class="edu-card" data-searchable="Fashion Designing Certification 2022">
+          <div class="edu-title">Fashion Designing Certification</div>
+          <div class="edu-year">2022</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Creative Process -->
+    <section id="process">
+      <div class="section-label-vertical">Process</div>
+      <div class="reveal">
+        <h2 class="section-heading">Creative Process</h2>
+        <p class="section-subtitle">How ideas become garments.</p>
+      </div>
+      <div class="process-steps reveal">
+        <article class="process-step hover-target" data-searchable="Inspiration Research moodboards runway street">
+          <div class="process-badge">01</div>
+          <div class="process-icon">💡</div>
+          <h3 class="process-title">Inspiration &amp; Research</h3>
+          <p class="process-text">Gathering references from runways, archives and street style to build moodboards that anchor each collection.</p>
+        </article>
+        <article class="process-step hover-target" data-searchable="Sketch Concept silhouettes drawings">
+          <div class="process-badge">02</div>
+          <div class="process-icon">✏️</div>
+          <h3 class="process-title">Sketch &amp; Concept</h3>
+          <p class="process-text">Exploring silhouettes through hand sketches and digital line-ups, editing until the story feels clear.</p>
+        </article>
+        <article class="process-step hover-target" data-searchable="Fabric Pattern drafting mock ups">
+          <div class="process-badge">03</div>
+          <div class="process-icon">📐</div>
+          <h3 class="process-title">Fabric &amp; Pattern</h3>
+          <p class="process-text">Selecting fabrics, drafting patterns and building toiles or mock-ups to test proportions and movement.</p>
+        </article>
+        <article class="process-step hover-target" data-searchable="Fittings Refinement adjustments">
+          <div class="process-badge">04</div>
+          <div class="process-icon">📏</div>
+          <h3 class="process-title">Fittings &amp; Refinement</h3>
+          <p class="process-text">Running fittings, pinning, re-cutting and refining details to achieve a confident, comfortable fit.</p>
+        </article>
+        <article class="process-step hover-target" data-searchable="Final Look Presentation shoot show styling">
+          <div class="process-badge">05</div>
+          <div class="process-icon">🧵</div>
+          <h3 class="process-title">Final Look &amp; Presentation</h3>
+          <p class="process-text">Finishing, pressing and styling the final look for studio shoots, client viewings or runway moments.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Hobbies -->
+    <section id="hobbies">
+      <div class="section-label-vertical">Hobbies</div>
+      <div class="reveal">
+        <h2 class="section-heading">Beyond the Studio</h2>
+        <p class="section-subtitle">Passions that keep me inspired.</p>
+      </div>
+      <div class="hobbies-grid reveal">
+        <article class="hobby-card hover-target" data-searchable="Fashion illustration DIY accessories">
+          <div class="hobby-icon">🖋️</div>
+          <h3 class="hobby-title">Fashion illustration &amp; DIY accessories</h3>
+          <p class="hobby-text">Sketching looks and handcrafting accessories helps me test ideas quickly before they reach the pattern table.</p>
+        </article>
+        <article class="hobby-card hover-target" data-searchable="Exploring global fashion trends">
+          <div class="hobby-icon">🌍</div>
+          <h3 class="hobby-title">Exploring global fashion trends</h3>
+          <p class="hobby-text">I regularly follow international street style and runway shows to keep my eye trained on what is next.</p>
+        </article>
+        <article class="hobby-card hover-target" data-searchable="Handcrafting creative sewing projects">
+          <div class="hobby-icon">🧶</div>
+          <h3 class="hobby-title">Handcrafting &amp; creative sewing projects</h3>
+          <p class="hobby-text">Small, hand-sewn projects allow me to experiment with textures, finishes and upcycled materials in a playful way.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="section-label-vertical">Contact</div>
+      <div class="reveal">
+        <h2 class="section-heading">Let’s Work Together</h2>
+        <p class="section-subtitle">Collaborations, projects and studio roles.</p>
+      </div>
+      <div class="contact-grid reveal">
+        <aside class="contact-info-card">
+          <h3 style="font-family:'Playfair Display',serif; margin-top:0; margin-bottom:0.4rem;">Pooja Rani</h3>
+          <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.16em; color:var(--text-muted); margin-bottom:1rem;">Fashion Designer</div>
+          <div class="contact-info-row">
+            <div class="contact-icon">📍</div>
+            <div>Bhagian Village, P.O. Hussainpur, Lalowal, Punjab, India (144210)</div>
+          </div>
+          <div class="contact-info-row">
+            <div class="contact-icon">✉️</div>
+            <a href="mailto:poojabhagian@gmail.com">poojabhagian@gmail.com</a>
+          </div>
+          <div class="contact-info-row">
+            <div class="contact-icon">📞</div>
+            <a href="tel:+385955813830">+385955813830</a>
+          </div>
+          <div class="contact-info-row">
+            <div class="contact-icon">💬</div>
+            <a href="https://wa.me/+91941782053073" target="_blank" rel="noreferrer">WhatsApp: Message me</a>
+          </div>
+          <p class="contact-status">Open to design studios, internships, collaborations and freelance projects where I can contribute fresh silhouettes and hands-on studio support.</p>
+        </aside>
+        <div class="contact-form-card">
+          <form id="contact-form" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name">Name *</label>
+                <input id="name" name="name" type="text" class="form-input" placeholder="Your full name" />
+                <div class="form-error" id="error-name"></div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input id="email" name="email" type="email" class="form-input" placeholder="you@example.com" />
+                <div class="form-error" id="error-email"></div>
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject *</label>
+                <input id="subject" name="subject" type="text" class="form-input" placeholder="Project, role or collaboration" />
+                <div class="form-error" id="error-subject"></div>
+              </div>
+              <div class="form-group" style="grid-column:1/-1;">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" class="form-textarea" placeholder="Share details about your project, studio or idea (min. 20 characters)"></textarea>
+                <div class="form-error" id="error-message"></div>
+              </div>
+            </div>
+            <button type="submit" class="btn-submit hover-target" id="submit-btn">Send Message</button>
+            <div class="form-status" id="form-status"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Declaration -->
+    <section id="declaration">
+      <div class="section-label-vertical">Declaration</div>
+      <div class="reveal">
+        <h2 class="section-heading">Declaration</h2>
+        <p class="section-subtitle">In my own words.</p>
+      </div>
+      <div class="declaration-box reveal">
+        <p class="declaration-text">“I hereby declare that all the above information given is true to the best of my knowledge.”</p>
+        <div class="declaration-meta">
+          <span><strong>Date:</strong> _____________</span>
+          <span><strong>Place:</strong> _____________</span>
+        </div>
+        <div class="signature">Pooja Rani</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="project-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-image" id="modal-image"></div>
+      <div class="modal-content">
+        <button class="modal-close hover-target" id="modal-close" aria-label="Close">✕</button>
+        <h3 class="modal-title" id="modal-title"></h3>
+        <div class="modal-sub" id="modal-sub"></div>
+        <div class="modal-body" id="modal-body"></div>
+        <div class="modal-list-title">Key techniques &amp; materials</div>
+        <ul class="modal-list" id="modal-list"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-tag">
+      <div class="footer-name">POOJA RANI</div>
+      <div class="footer-role">Fashion Designer</div>
+      <div class="footer-quote">“I design pieces that carry stories, not just seams.”</div>
+      <div class="footer-icons">
+        <a href="mailto:poojabhagian@gmail.com" class="footer-icon hover-target" aria-label="Email">✉️</a>
+        <a href="tel:+385955813830" class="footer-icon hover-target" aria-label="Phone">📞</a>
+        <a href="https://wa.me/+91941782053073" target="_blank" rel="noreferrer" class="footer-icon hover-target" aria-label="WhatsApp">💬</a>
+      </div>
+      <div class="footer-links">
+        <a href="#about" class="hover-target" data-scroll="about">About</a>
+        <a href="#lookbook" class="hover-target" data-scroll="lookbook">Lookbook</a>
+        <a href="#contact" class="hover-target" data-scroll="contact">Contact</a>
+      </div>
+      <div class="footer-care">
+        <span>🧺</span>
+        <span>🌡️</span>
+        <span>🧵</span>
+        <span>✂️</span>
+      </div>
+    </div>
+    <div class="footer-meta">© <span id="year"></span> Pooja Rani. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Smooth scroll helper
+    function smoothScrollTo(id) {
+      const element = document.getElementById(id);
+      if (!element) return;
+      const y = element.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+
+    // Attach smooth scroll to elements with data-scroll
+    document.addEventListener('click', (e) => {
+      const target = e.target.closest('[data-scroll]');
+      if (target) {
+        e.preventDefault();
+        const id = target.getAttribute('data-scroll');
+        smoothScrollTo(id);
+      }
+    });
+
+    // Header scroll state & back to top visibility
+    const header = document.getElementById('site-header');
+    const backToTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY > 40;
+      header.classList.toggle('header-scrolled', scrolled);
+      backToTop.classList.toggle('visible', window.scrollY > 360);
+    });
+
+    // Side nav active state using IntersectionObserver
+    const sections = document.querySelectorAll('main section');
+    const sideDots = document.querySelectorAll('.side-dot');
+
+    const sectionMap = {};
+    sections.forEach(sec => {
+      sectionMap[sec.id] = sec;
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          sideDots.forEach(dot => {
+            dot.classList.toggle('active', dot.getAttribute('data-scroll') === id);
+          });
+        }
+      });
+    }, { rootMargin: '-50% 0px -50% 0px', threshold: 0.1 });
+
+    sections.forEach(sec => observer.observe(sec));
+
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // Custom cursor
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorRing = document.querySelector('.cursor-ring');
+
+    let cursorTimeout;
+    window.addEventListener('mousemove', (e) => {
+      cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      cursorRing.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      document.body.classList.remove('cursor-hidden');
+      clearTimeout(cursorTimeout);
+      cursorTimeout = setTimeout(() => {
+        document.body.classList.add('cursor-hidden');
+      }, 2000);
+    });
+
+    const hoverTargets = document.querySelectorAll('.hover-target');
+    hoverTargets.forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-ring--hover'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('cursor-ring--hover'));
+    });
+
+    // Parallax effect on hero artboard
+    const parallaxEls = document.querySelectorAll('[data-parallax]');
+    window.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 10;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      parallaxEls.forEach(el => {
+        el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      });
+    });
+
+    // Profile dropdown
+    const avatar = document.getElementById('profile-avatar');
+    const dropdown = document.getElementById('profile-dropdown');
+
+    avatar.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!avatar.contains(e.target)) {
+        dropdown.classList.remove('active');
+      }
+    });
+
+    // Lookbook modal content
+    const projectDetails = {
+      'evening-elegance': {
+        title: 'Evening Elegance – Gown Capsule',
+        sub: 'Liquid drape, sculpted bodices and twilight romance.',
+        body: `This capsule celebrates the tension between structure and softness. Inspired by twilight city lights reflecting on water, each gown pairs a sculpted bodice with a fluid skirt that moves effortlessly on the body.
+
+Pooja experimented with layered georgettes and satins to create a subtle sheen that catches the light without overpowering the wearer. Boning, internal corsetry and strategic panel lines sculpt the torso while allowing enough ease for long evenings and dancing.
+
+Across the capsule, she applied advanced stitching techniques, hand-finished hems and careful inner construction so that the gowns look as refined on the inside as they do on the red carpet.`,
+        materials: ['Satin-backed crepe and georgette layers', 'Structured boning and corsetry detailing', 'Invisible zips and hand-finished hems']
+      },
+      'heritage-threads': {
+        title: 'Heritage Threads – Punjabi Fusion Series',
+        sub: 'Cultural embroidery, modern cuts and layered nostalgia.',
+        body: `Heritage Threads merges Punjabi craft with contemporary silhouettes made for global wardrobes. The collection borrows from phulkari and traditional surface textures, but places them on easy, modular separates.
+
+Pooja designed cropped jackets, tapered trousers and fluid skirts that can be styled together or with existing pieces. Placement embroidery and panelled construction keep the garments visually light while honouring regional motifs.
+
+She balanced vibrant colours with grounded neutrals, paying close attention to how each piece drapes when in motion—whether on the street, at celebrations or on a modern runway.`,
+        materials: ['Cotton-silk blends with lightweight linings', 'Embroidered panelling inspired by phulkari', 'Contrast piping and hand-tacked finishes']
+      },
+      'minimal-street': {
+        title: 'Minimal Street – European Edit',
+        sub: 'Clean lines, urban ease and subtle colour blocking.',
+        body: `Minimal Street reflects the clarity and restraint Pooja experienced while working in Croatia. She focused on clean tailoring, sharp shoulders and cropped lengths, creating pieces that slip easily into everyday city dressing.
+
+The palette leans on soft greys, muted blues and blocks of black, with occasional colour pops inspired by coastal facades. Each piece is designed to be layered, allowing the wearer to adjust looks across seasons and occasions.
+
+By refining pattern lines, pocket placements and finishing details, Pooja ensured that every garment feels both functional and visually precise from every angle.`,
+        materials: ['Structured cotton twills and wool blends', 'Top-stitched seams and utility-inspired pockets', 'Matte buttons and metal hardware accents']
+      },
+      'soft-whites': {
+        title: 'Soft Whites – Bridal Concept Line',
+        sub: 'Whisper-light layers for intimate ceremonies.',
+        body: `Soft Whites reimagines bridalwear as quiet, intimate and deeply personal. Pooja focused on delicate transparencies, layering tulles and organza over subtle bases to create depth without weight.
+
+Each look features small, considered details: hand-applied pearls, fine rouleau straps and gentle trains that glide rather than overwhelm. The silhouettes are romantic yet pared back, designed for brides who value ease alongside ceremony.
+
+Close attention to internal structure, bust support and seam placement ensures that every gown moves gracefully through long celebrations and candid moments.`,
+        materials: ['Soft tulle, organza and satin linings', 'Hand-applied pearls and subtle embellishments', 'Hidden support seams and soft boning']
+      },
+      'eco-layers': {
+        title: 'Eco Layers – Sustainable Capsule',
+        sub: 'Low-impact fabrics, high-impact silhouettes.',
+        body: `Eco Layers explores how sustainability can feel luxurious, not restrictive. Pooja selected organic cottons, linens and repurposed textiles, using clever panelling to minimise waste on the cutting table.
+
+Silhouettes include easy shirts, wrap dresses and layered outerwear that can be styled multiple ways. Natural textures are left visible, celebrating the character of each fabric rather than hiding it.
+
+Throughout the capsule she focused on durable construction, repair-friendly seam lines and timeless shapes, extending the life of each piece beyond a single season.`,
+        materials: ['Organic cottons and linen blends', 'Zero-waste or reduced-waste pattern layouts', 'Corozzo buttons and minimal hardware']
+      },
+      'resort-bloom': {
+        title: 'Resort Bloom – Summer Story',
+        sub: 'Prints, movement and sun-soft colour.',
+        body: `Resort Bloom is a light-hearted collection designed for travel, seaside evenings and relaxed celebrations. Pooja combined painterly florals with airy silhouettes that move with the breeze.
+
+The collection includes bias-cut dresses, elasticated waist trousers and open-backed tops, each designed to be packed, worn and re-worn with ease. Strategic gathers and ties let the wearer adjust volume and neckline to their comfort.
+
+Pattern placement and print scale were carefully tested on mock-ups to keep the looks visually balanced from every angle, especially in motion.`,
+        materials: ['Viscose and cotton-blend challis with custom prints', 'Adjustable ties, elasticated details and covered buttons', 'Bias-cut panels for fluid drape']
+      }
+    };
+
+    const modalBackdrop = document.getElementById('project-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('modal-title');
+    const modalSub = document.getElementById('modal-sub');
+    const modalBody = document.getElementById('modal-body');
+    const modalList = document.getElementById('modal-list');
+    const modalClose = document.getElementById('modal-close');
+
+    document.getElementById('lookbook-grid').addEventListener('click', (e) => {
+      const card = e.target.closest('.lookbook-card');
+      if (!card) return;
+      const key = card.getAttribute('data-project');
+      const details = projectDetails[key];
+      if (!details) return;
+
+      modalTitle.textContent = details.title;
+      modalSub.textContent = details.sub;
+      modalBody.textContent = '';
+      details.body.split('\n\n').forEach(p => {
+        const para = document.createElement('p');
+        para.textContent = p;
+        modalBody.appendChild(para);
+      });
+      modalList.innerHTML = '';
+      details.materials.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        modalList.appendChild(li);
+      });
+      const img = card.querySelector('img');
+      if (img) {
+        modalImage.style.backgroundImage = `url('${img.src}')`;
+      }
+
+      modalBackdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) {
+        modalBackdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    modalClose.addEventListener('click', () => {
+      modalBackdrop.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) {
+        modalBackdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Basic search/filter for cards and lookbook
+    const searchInput = document.getElementById('search-input');
+    const searchableEls = document.querySelectorAll('[data-searchable]');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        searchableEls.forEach(el => {
+          const text = el.getAttribute('data-searchable').toLowerCase();
+          if (!query || text.includes(query)) {
+            el.style.opacity = '';
+            el.style.transform = '';
+            el.style.pointerEvents = '';
+          } else {
+            el.style.opacity = '0.18';
+            el.style.transform = 'scale(0.98)';
+            el.style.pointerEvents = 'none';
+          }
+        });
+      });
+    }
+
+    // Contact form validation
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const statusEl = document.getElementById('form-status');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      const subject = document.getElementById('subject');
+      const message = document.getElementById('message');
+
+      let valid = true;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      function setError(id, msg) {
+        const el = document.getElementById('error-' + id);
+        if (el) el.textContent = msg || '';
+      }
+
+      if (!name.value.trim()) { valid = false; setError('name', 'Please enter your name.'); } else setError('name', '');
+      if (!email.value.trim()) { valid = false; setError('email', 'Please enter your email.'); }
+      else if (!emailRegex.test(email.value.trim())) { valid = false; setError('email', 'Please enter a valid email address.'); }
+      else setError('email', '');
+
+      if (!subject.value.trim()) { valid = false; setError('subject', 'Please add a subject.'); } else setError('subject', '');
+      if (!message.value.trim() || message.value.trim().length < 20) {
+        valid = false;
+        setError('message', 'Please share at least 20 characters so I understand your project.');
+      } else setError('message', '');
+
+      if (!valid) {
+        statusEl.textContent = '';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      statusEl.textContent = '';
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+        statusEl.textContent = 'Message sent (demo). Thank you for reaching out—your note has been received in this portfolio preview.';
+        form.reset();
+      }, 1200);
+    });
+
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
